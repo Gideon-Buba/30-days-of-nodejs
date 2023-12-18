@@ -7,8 +7,9 @@ const port = 3000;
 
 const server = http.createServer((request, response) => {
     response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write('Hello world!!!') // serving a string 
     console.log(`Request received from ${host}:${port}`);
-    response.end('Hello, this is Gideons server');
+    response.end('');
 });
 
 server.listen(port, host, (err) => {
