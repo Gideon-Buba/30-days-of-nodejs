@@ -16,3 +16,5 @@ fs.readFileSync('./message.txt', (error, data) => {
     }
     console.log("Content: ", + data)
 })
+
+// completed day 5
