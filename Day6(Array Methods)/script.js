@@ -42,3 +42,5 @@ console.log(evenNumbers);
 evenNumbers.shift();
 console.log(evenNumbers);
 
+// reverse() method in arrays
+
