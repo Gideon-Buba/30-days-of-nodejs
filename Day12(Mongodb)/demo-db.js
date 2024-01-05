@@ -1,15 +1,20 @@
-// Including the package
-const mongo = require("mongodb");
+const express = require('express');
+const fs = require('fs');
 
-// Creating the connection
-const db = mongodb("mongodb://localhost:27017/demo-db");
-//establishing the connection
-mongo.connect(new_db ,(error , db) => {
-	if (error){
-		throw error;
-	}
-	console.log("Database demo_db created successfully");
-	//To close the connection
-	db.close();
-});
-	
+const app =  express();
+
+app.get('/', (req, res) => {
+    fs.readFile('./index.html', 'utf8', (err, html) => {
+        if (err) {
+            res.status(500).send("Sorry, an error has occured")
+        } else {
+         res.send(html)
+        } 
+    })
+})
+
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+app.listen(3000, () => {
+    console.log('Server is listening on port 3000');
+})
