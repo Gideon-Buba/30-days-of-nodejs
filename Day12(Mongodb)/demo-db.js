@@ -28,33 +28,34 @@
 
 // Create
 
-const { MongoClient} = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 const url = "mongodb://localhost:27017";
-const dbName = "demo_db";
+const dbName = "demo-db";
 
-const data  = {
+const data = {
     firstName: "Gideon",
     secondName: "Buba",
     email: "bubaambore@gmail.com",
     password: "123four",
     age: 21,
-}
+};
 
-MongoClient.connect(url, {} , (err, client) => {
-    if (err) throw err
+MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err) throw err;
 
     const db = client.db(dbName);
-    const collection  = db.collection("users")
+    const collection = db.collection("users");
 
-    db.collection.insertOne(data, (err, result) => {
+    collection.insertOne(data, (err, result) => {
         if (err) {
             throw err;
-        } 
-        console.log("Document created:", result.ops)
+        }
+        console.log("Document created:", result.ops);
         client.close();
-    })
-})
+    });
+});
+
 
 
  
