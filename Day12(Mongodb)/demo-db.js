@@ -60,5 +60,20 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
 
  
 // Read
+onst url = 'mongodb://localhost:27017';
+const dbName = 'yourDatabase';
 
+MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+  if (err) throw err;
+
+  const db = client.db(dbName);
+  const collection = db.collection('yourCollection');
+
+  // Find documents
+  collection.find({ key1: 'value1' }).toArray((err, documents) => {
+    if (err) throw err;
+    console.log('Found documents:', documents);
+    client.close();
+  });
+});
 
