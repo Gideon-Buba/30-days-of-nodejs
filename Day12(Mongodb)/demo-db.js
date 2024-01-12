@@ -28,39 +28,39 @@
 
 // Create
 
-const { MongoClient } = require("mongodb");
+// const { MongoClient } = require("mongodb");
 
-const url = "mongodb://localhost:27017";
-const dbName = "demo-db";
+// const url = "mongodb://localhost:27017";
+// const dbName = "demo-db";
 
-const data = {
-    firstName: "Gideon",
-    secondName: "Buba",
-    email: "bubaambore@gmail.com",
-    password: "123four",
-    age: 21,
-};
+// const data = {
+//     firstName: "Gideon",
+//     secondName: "Buba",
+//     email: "bubaambore@gmail.com",
+//     password: "123four",
+//     age: 21,
+// };
 
-MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-    if (err) throw err;
+// MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+//     if (err) throw err;
 
-    const db = client.db(dbName);
-    const collection = db.collection("users");
+//     const db = client.db(dbName);
+//     const collection = db.collection("users");
 
-    collection.insertOne(data, (err, result) => {
-        if (err) {
-            throw err;
-        }
-        console.log("Document created:", result.ops);
-        client.close();
-    });
-});
+//     collection.insertOne(data, (err, result) => {
+//         if (err) {
+//             throw err;
+//         }
+//         console.log("Document created:", result.ops);
+//         client.close();
+//     });
+// });
 
 
 
  
 // Read
-onst url = 'mongodb://localhost:27017';
+const url = 'mongodb://localhost:27017';
 const dbName = 'yourDatabase';
 
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
