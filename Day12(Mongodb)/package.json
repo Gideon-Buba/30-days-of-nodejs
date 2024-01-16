@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start:dev": "nodemon demo-db"
+    "start:dev": "nodemon demo-db.js"
   },
   "dependencies": {
     "express": "^4.18.2",

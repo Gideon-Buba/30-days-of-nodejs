@@ -41,23 +41,21 @@
 //     age: 21,
 // };
 
-// MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-//     if (err) throw err;
+// (async () => {
+//     const client = await MongoClient.connect(url);
+//     console.log('here');
 
 //     const db = client.db(dbName);
 //     const collection = db.collection("users");
 
-//     collection.insertOne(data, (err, result) => {
-//         if (err) {
-//             throw err;
-//         }
-//         console.log("Document created:", result.ops);
-//         client.close();
-//     });
-// });
+//     const result = await collection.insertOne(data);
+
+//     console.log("Document created:", result);
+//     client.close();
+// })();
 
 
-
+const { MongoClient } = require('mongodb')
  
 // Read
 const url = 'mongodb://localhost:27017';
