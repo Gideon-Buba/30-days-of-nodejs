@@ -59,9 +59,10 @@ const { MongoClient } = require('mongodb')
  
 // Read
 const url = 'mongodb://localhost:27017';
-const dbName = 'yourDatabase';
+const dbName = 'demo-db';
 
-MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect(url, (err, client) => {
+    console.log('hello')
   if (err) throw err;
 
   const db = client.db(dbName);
@@ -74,4 +75,7 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
     client.close();
   });
 });
+
+
+// Used terminal for most of the things I'm learning 
 
