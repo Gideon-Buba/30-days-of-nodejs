@@ -79,3 +79,6 @@ MongoClient.connect(url, (err, client) => {
 
 // Used terminal for most of the things I'm learning 
 
+// Learning queries from w3schools
+
+
