@@ -38,6 +38,7 @@
 //     secondName: "Buba",
 //     email: "bubaambore@gmail.com",
 //     password: "123four",
+//     phone: 12345,
 //     age: 21,
 // };
 
@@ -55,30 +56,40 @@
 // })();
 
 
-const { MongoClient } = require('mongodb')
- 
-// Read
-const url = 'mongodb://localhost:27017';
-const dbName = 'demo-db';
+
+const { MongoClient } =  require("mongodb");
+const url = "mongodb://localhost:27017";
+const dbName = "test-db"
 
 MongoClient.connect(url, (err, client) => {
-    console.log('hello')
-  if (err) throw err;
+    if (err) {
+        console.error("Error connecting to MongoDB:", err);
+        return;
+    }
 
-  const db = client.db(dbName);
-  const collection = db.collection('yourCollection');
+    console.log("Connected to Mongodb successfully!!!")
 
-  // Find documents
-  collection.find({ key1: 'value1' }).toArray((err, documents) => {
-    if (err) throw err;
-    console.log('Found documents:', documents);
-    client.close();
-  });
-});
+    const db = client.db(dbName)
 
+    const data = {
+        firstName: "John",
+        lastname: "Doe",
+        phone: 12345,
+        date: Date()
+    }
 
-// Used terminal for most of the things I'm learning 
+    const collectionName = "users";
 
-// Learning queries from w3schools
+    db.collection(collectionName).insertOne(data, (insertErr, result) => {
+        if (insertErr) {
+            console.log("Error inserting document", insertErr)
+        } else {
+            console.log("Document inserted succesfully", result.ops[0]);
+        }
+
+        client.close()
+    })
+})
+
 
 
