@@ -57,39 +57,40 @@
 
 
 
-const { MongoClient } =  require("mongodb");
-const url = "mongodb://localhost:27017";
-const dbName = "test-db"
+// const { MongoClient } =  require("mongodb");
+// const url = "mongodb://localhost:27017";
+// const dbName = "test-db"
 
-MongoClient.connect(url, (err, client) => {
-    if (err) {
-        console.error("Error connecting to MongoDB:", err);
-        return;
-    }
+// MongoClient.connect(url, (err, client) => {
+//     if (err) {
+//         console.error("Error connecting to MongoDB:", err);
+//         return;
+//     }
 
-    console.log("Connected to Mongodb successfully!!!")
+//     console.log("Connected to Mongodb successfully!!!")
 
-    const db = client.db(dbName)
+//     const db = client.db(dbName)
 
-    const data = {
-        firstName: "John",
-        lastname: "Doe",
-        phone: 12345,
-        date: Date()
-    }
+//     const data = {
+//         firstName: "John",
+//         lastname: "Doe",
+//         phone: 12345,
+//         date: Date()
+//     }
 
-    const collectionName = "users";
+//     const collectionName = "users";
 
-    db.collection(collectionName).insertOne(data, (insertErr, result) => {
-        if (insertErr) {
-            console.log("Error inserting document", insertErr)
-        } else {
-            console.log("Document inserted succesfully", result.ops[0]);
-        }
+//     db.collection(collectionName).insertOne(data, (insertErr, result) => {
+//         if (insertErr) {
+//             console.log("Error inserting document", insertErr)
+//         } else {
+//             console.log("Document inserted succesfully", result.ops[0]);
+//         }
 
-        client.close()
-    })
-})
+//         client.close()
+//     })
+// })
+
 
 
 
