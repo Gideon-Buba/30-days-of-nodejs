@@ -83,31 +83,108 @@ mongoose
 
 // npm i -s express mongoose
 
-{/*
-
 app.put("/states/:state", 
-    // ... (validation middleware)
+    body('name').exists().isString().notEmpty(),
+    body('capital').exists().isString().notEmpty(),
+    body('gov').exists().isString().notEmpty(),
     async (req, res) => {
-        // ... (update logic)
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return res.status(400).json({
+                message: 'Error in your stuff',
+                ...result
+            });
+        }
+
+        const updatedState = await StateModel.findByIdAndUpdate(
+            req.params.state,
+            {
+                $set: {
+                    name: req.body.name,
+                    capital: req.body.capital,
+                    gov: req.body.gov,
+                }
+            },
+            { new: true }
+        );
+
+        if (!updatedState) {
+            return res.status(404).json({
+                message: `State ${req.params.state} does not exist`
+            });
+        }
+
+        res.json({ state: updatedState });
     });
 
 // Update Operation for LGAs
 app.put("/states/:state/lga/:lga", 
-    // ... (validation middleware)
+    body('name').exists().isString().notEmpty(),
+    body('headquarter').exists().isString().notEmpty(),
+    body('chairman').exists().isString().notEmpty(),
     async (req, res) => {
-        // ... (update logic)
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return res.status(400).json({
+                message: 'Error in your stuff',
+                ...result
+            });
+        }
+
+        const updatedLGA = await LocalGovtModel.findByIdAndUpdate(
+            req.params.lga,
+            {
+                $set: {
+                    name: req.body.name,
+                    headquarter: req.body.headquarter,
+                    chairman: req.body.chairman,
+                }
+            },
+            { new: true }
+        );
+
+        if (!updatedLGA) {
+            return res.status(404).json({
+                message: `LGA ${req.params.lga} does not exist`
+            });
+        }
+
+        res.json({ lga: updatedLGA });
     });
 
 // Delete Operation for States
 app.delete("/states/:state", async (req, res) => {
-    // ... (delete logic)
+    const deletedState = await StateModel.findByIdAndDelete(req.params.state);
+
+    if (!deletedState) {
+        return res.status(404).json({
+            message: `State ${req.params.state} does not exist`
+        });
+    }
+
+    res.json({ message: `State ${req.params.state} deleted successfully` });
 });
 
 // Delete Operation for LGAs
 app.delete("/states/:state/lga/:lga", async (req, res) => {
-    // ... (delete logic)
+    const deletedLGA = await LocalGovtModel.findByIdAndDelete(req.params.lga);
+
+    if (!deletedLGA) {
+        return res.status(404).json({
+            message: `LGA ${req.params.lga} does not exist`
+        });
+    }
+
+    res.json({ message: `LGA ${req.params.lga} deleted successfully` });
 });
 
-
-
-*/}
+mongoose
+  .connect("mongodb://127.0.0.1:27017/statesandcapita")
+  .then(() => {
+    app.listen(3000, () => {
+      console.log("Server started on port 3000");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
