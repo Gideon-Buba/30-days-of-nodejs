@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		
 		<!-- Including Custom css -->
-		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="./styles.css">
 		<title> Signup Form </title>
 	</head>
 	<body>
@@ -29,7 +29,7 @@
 				<div class="col-md-6 main">
 					<!-- Form Tag starts here -->
 					<!-- Action attribute is the route on backend. Method is POST -->
-					<form action="/sign_up" method="post">
+					<form action="/api/sign_up" method="post">
 					
 						<h1> Signup form </h1>
 
@@ -41,7 +41,7 @@
 							
 						<input class="box" type="text" name="phone" id="phone"  placeholder="Enter your Phone Number " required/><br>
 						<br>
-						<input type="submit" id="submitDetails"  name="submitDetails" value="Submit Your Details" /><br>
+						<button type="submit" id="submitDetails">Submit Your Details</button><br>
 					
 					</form>
 					
