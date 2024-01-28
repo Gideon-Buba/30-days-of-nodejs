@@ -1,5 +1,20 @@
 {
+  "name": "30-days-of-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "devStart": "nodemon script.js"
+  },
+  "author": "Gideon-Buba",
+  "license": "ISC",
   "dependencies": {
-    "mongodb": "^6.3.0"
+    "body-parser": "^1.20.2",
+    "date-fns": "^3.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }
