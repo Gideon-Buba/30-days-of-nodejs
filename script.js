@@ -9,18 +9,23 @@ const app = express();
 const port = 3000
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect("mongodb://localhost/testdb");
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+async function connectToDB() {
+    try {
+        await mongoose.connect("mongodb://localhost/testdb");
+        console.log("connected to database")
+    } catch (err) {
+        console.log("Error connecting to DB")
+    }
+}
+
 app.post('/signup', async (req, res) => {
     try {
-        const { fullName, email, phone, password } = req.body;
-
-        const user = new User({ fullName, email, phone, password });
-
-        await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        const user = await User.create({...req.body})
+        res.redirect('/login.html')
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -48,9 +53,13 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.listen(port, () => {
+
+connectToDB().then(() => {
+    app.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`)
 })
+})
+
 
 
 
