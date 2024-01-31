@@ -64,7 +64,7 @@
       //Test event ends here
       //Main event "next" 
       socket.on('next' , function(data) {
-        onsole.log(data); 
+        console.log(data); 
 			  $('#quotes').append("<blockquote>" + data.data.quote + "</blockquote>")
 		  })
 		  //Event ends

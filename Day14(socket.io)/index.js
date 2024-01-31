@@ -1,11 +1,8 @@
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
+const app = require("express")();
+const server = require('http').Server(app);
+const io = require("socket.io")(server);
 
-const app = express();
-const server = http.createServer(app);  // Create an HTTP server
-const io = new Server(server);  // Attach Socket.io to the HTTP server
-const port = 3000;
+const port = 3000
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -16,13 +13,14 @@ app.get('/admin', (req, res) => {
 });
 
 io.on('connection', function (socket) {
+  
     socket.emit('welcome', { data: 'welcome' });
   
-    socket.on('new', function(data) {   
-        console.log('About to upload Quote');
-        io.sockets.emit('next', { data: data });
-    });
-});
+    socket.on('new' , function(data) {   
+            console.log('About to upload Quote');
+            io.sockets.emit( 'next' , { data : data } )
+      })
+  });
 
 server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

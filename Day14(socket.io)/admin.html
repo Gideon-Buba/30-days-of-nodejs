@@ -86,8 +86,8 @@
         //Jquery code starts
         $('document').ready(function(){
         //Connecting the socket to host and port
-         var socket = io.connect('http://localhost:3000');
-           socket.on('welcome', function (data) {
+         const socket = new Server('http://localhost:3000');
+           socket.on("connection", function (data) {
             
           });
             
