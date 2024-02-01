@@ -59,34 +59,3 @@ connectToDB().then(() => {
     console.log(`server is running at http://localhost:${port}`)
 })
 })
-
-
-
-
-
-
-// (async function() {
-//     try{
-//         const currentDate = new Date();
-//         const formattedDate = format(currentDate, "dd/MM/yyyy");
-
-//         const info = await user.create({
-//             name: "Gideon",
-//             age: 22,
-//             email: "bubaambore@gmail.com",
-//             createdAt: formattedDate,
-//             hobbies: ["Reading", "Coding", "Sports"],
-//             address: {
-//                 street: "Gudu",
-//                 city: "Abuja"
-//             }
-//         })
-        
-//         await info.save()
-//         console.log(info)
-//     } catch(error) {
-//         console.error(error.message)
-//     } finally {
-//         mongoose.disconnect()
-//     } 
-// }) ();
