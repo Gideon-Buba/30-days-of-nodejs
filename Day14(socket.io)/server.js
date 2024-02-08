@@ -6,23 +6,24 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
-const port = 3000;
+const port = process.env.PORT || 3000; // Allow dynamic port binding for deployment
 
-// serving static files from public directory
+// Serving static files from the public directory
 app.use(express.static(path.join(__dirname, "public")));
 
-// root path
+// Root path
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html")); // Adjusted path for index.html
 });
 
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "admin.html"));
+  res.sendFile(path.join(__dirname, "public", "admin.html")); // Adjusted path for admin.html
 });
 
 io.on("connection", (socket) => {
   console.log("A user connected");
 
+  // Handle admin events
   socket.on("admin", (data) => {
     io.emit("color", { color: data.color });
   });
