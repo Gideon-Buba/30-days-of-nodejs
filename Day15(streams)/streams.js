@@ -1,9 +1,9 @@
 // require fs module for file system
 const fs = require('fs');
 // write data to a file using writeable stream
-const wdata = "I am working with streams for the first time";
+const wdata = "Hello my name is Gideon";
 
-const myWriteStream = fs.createWriteStream('aboutMe.txt');
+const myWriteStream = fs.createWriteStream('gideon.txt');
 
 // write data 
 
