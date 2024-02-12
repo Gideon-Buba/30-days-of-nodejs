@@ -1,37 +1,27 @@
-// require fs module for file system
 const fs = require('fs');
-// write data to a file using writeable stream
-const wdata = "Hello my name is Gideon";
+const http = require("http");
 
-const myWriteStream = fs.createWriteStream('gideon.txt');
+// Create a readable stream to read from a file
+const myReadStream = fs.createReadStream("readme.txt", "utf-8");
 
-// write data 
+// Create a writable stream to write to a file
+const myWriteStream = fs.createWriteStream("writeme.txt", { encoding: "utf-8" });
 
-myWriteStream.write(wdata);
+// Pipe the readable stream to the writable stream to write to "writeme.txt"
+myReadStream.pipe(myWriteStream);
 
-// done writing
-myWriteStream.end();
+// Create an HTTP server
+const server = http.createServer((req, res) => {
+    console.log('Request was made: ' + req.url);
 
-// write handler for error event 
-myWriteStream.on('error', function(err){
-   console.log(err);
+    // Set the response headers
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+
+    // Pipe the readable stream to the response stream to send the contents of "readme.txt"
+    myReadStream.pipe(res);
 });
 
-myWriteStream.on('finish', function() {
-    console.log("data written successfully using streams.");
-	console.log("Now trying to read the same file using read streams ");
-	var myReadStream = fs.createReadStream('aboutMe.txt');
-	// add handlers for our read stream
-	var rContents = '' // to hold the read contents;
-	myReadStream.on('data', function(chunk) {
-		rContents += chunk;
-	});
-	myReadStream.on('error', function(err){
-		console.log(err);
-	});
-	myReadStream.on('end',function(){
-		console.log('read: ' + rContents);
-	});
-	console.log('performed write and read using streams');
-
-});		
+// Listen to the server on port 3000
+server.listen(8000, "127.0.0.1", () => {
+    console.log('Server is running on http://localhost:8000');
+});
